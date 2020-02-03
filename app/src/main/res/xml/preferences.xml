@@ -4,9 +4,9 @@
 
     <SwitchPreference
         android:id="@+id/switchMode"
-        android:defaultValue="true"
+        android:defaultValue="false"
         android:key="switch"
-        android:summary="Click to switch on or off"
+        android:summary="Click to switch to Light Mode or Dark Mode"
         android:switchTextOn="Dark Mode"
         android:title="Switch Preference"
         app:switchTextOff="Light Mode" />

@@ -25,7 +25,9 @@ class MainBabyBlissLoginUIActivity : AppCompatActivity() {
             super.onBackPressed()
         }
 
-        addContactButton.setOnClickListener { saveContact() }
+        addContactButton.setOnClickListener {
+            saveContact()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -44,10 +46,11 @@ class MainBabyBlissLoginUIActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun saveContact() {
+    fun saveContact() {
         val nameValue = name.text.toString()
         val emailValue = email.text.toString()
         val phoneValue = phone.text.toString()
+        val newContact = Contact(0, nameValue, emailValue, phoneValue)
 
         if (
             phoneValue.validator()
@@ -74,10 +77,8 @@ class MainBabyBlissLoginUIActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
 
-
-
             val intent = Intent()
-            intent.putExtra(CONTACT, Contact(0, nameValue, emailValue, phoneValue))
+            intent.putExtra(CONTACT, newContact)
             setResult(Activity.RESULT_OK, intent)
             finish()
         }
