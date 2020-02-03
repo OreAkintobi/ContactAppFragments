@@ -8,9 +8,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/contact_me"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/contact_me_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.ore.contactapp.LoginActivity">
