@@ -12,6 +12,9 @@ class ContactRepository(private val contactDao: ContactDAO) {
     val allContacts: LiveData<List<Contact>> = contactDao.getAlphabetizedContacts()
 
     fun insert(contact: Contact) {
+
         contactDao.insert(contact)
+
+
     }
 }

@@ -10,7 +10,6 @@ import androidx.room.RoomDatabase
 abstract class ContactDatabase : RoomDatabase() {
 
     abstract fun contactDao(): ContactDAO
-
     companion object {
         // Singleton prevents multiple instances of database opening at the
         // same time.

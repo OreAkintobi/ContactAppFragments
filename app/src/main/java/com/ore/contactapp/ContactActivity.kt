@@ -3,7 +3,6 @@ package com.ore.contactapp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +16,6 @@ class ContactActivity : AppCompatActivity() {
 
     lateinit var database: ContactDatabase
     private lateinit var contactViewModel: ContactViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val contacts = ArrayList<Contact>()
@@ -40,7 +38,10 @@ class ContactActivity : AppCompatActivity() {
 
         val bundle = intent.extras?.getParcelable<Contact>("CONTACT")
         if (bundle != null) {
-            contacts.add(bundle)
+            val thread = Thread {
+                contacts.add(bundle)
+            }
+            thread.start()
         }
 
         contacts.sortBy {
@@ -70,14 +71,14 @@ class ContactActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-                database = ContactDatabase.getDatabase(applicationContext)!!
+            database = ContactDatabase.getDatabase(applicationContext)!!
             val bundle = data?.extras
             val result = bundle?.getParcelable<Contact>("CONTACT")
             if (result != null) {
-                database.contactDao().insert(result)
-
-                val contactList = database.contactDao().getAllContacts()
-                Log.e("database",contactList.toString())
+                val thread = Thread {
+                    contactViewModel.insert(result)
+                }
+                thread.start()
             }
         }
     }
