@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ore.loginsignupui.R
 
+/** THIS CLASS PROVIDES/INFLATES A UNIT TEMPLATE OF WHAT EACH CONTACT DISPLAYED IN A RECYCLERVIEW LIST WOULD LOOK LIKE **/
 class ContactsAdapter(var contacts: List<Contact>, var context: Context): RecyclerView.Adapter<ContactsAdapter.ContactViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)

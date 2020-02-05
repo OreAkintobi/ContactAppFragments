@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ore.loginsignupui.R
 import kotlinx.android.synthetic.main.contact_scrolling.*
 
+/** SHOWS RECYCLERVIEW OF ALL CONTACTS STORED **/
 class ContactActivity : AppCompatActivity() {
 
     lateinit var database: ContactDatabase

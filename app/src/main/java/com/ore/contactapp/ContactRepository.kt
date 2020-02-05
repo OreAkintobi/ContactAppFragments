@@ -2,6 +2,7 @@ package com.ore.contactapp
 
 import androidx.lifecycle.LiveData
 
+/** CREATES ACCESS POINT TO THE DAO, THEREBY ALLOWING US ACCESS TO THE ROOM DATABASE **/
 // Declares the DAO as a private property in the constructor. Pass in the DAO
 // instead of the whole database, because you only need access to the DAO
 

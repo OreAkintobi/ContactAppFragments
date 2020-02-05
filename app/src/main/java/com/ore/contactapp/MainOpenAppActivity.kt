@@ -11,6 +11,7 @@ import com.ore.loginsignupui.R
 import kotlinx.android.synthetic.main.activity_main_open_app.*
 import kotlin.system.exitProcess
 
+/** LAUNCHES THE APP AND PROVIDES THE USER WITH INTENT CHOICES **/
 class MainOpenAppActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

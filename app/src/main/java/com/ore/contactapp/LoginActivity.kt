@@ -1,15 +1,14 @@
 package com.ore.contactapp
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.preference.PreferenceManager
+import androidx.appcompat.app.AppCompatActivity
 import com.ore.loginsignupui.R
 import kotlinx.android.synthetic.main.activity_login.*
 
+/** MANAGES LOGIN AND BARE-BONES AUTHENTICATION FOR A USER TO ENTER THE APP AND START USING THE APP **/
 const val EMAIL = "email"
 const val PASSWORD = "password"
 

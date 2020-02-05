@@ -8,7 +8,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.ore.loginsignupui.R
 
-
+/** PROVIDES SEPARATE ACTIVITY WITH A VIEW THAT SETS PREFERENCES FROM A LIST OF OPTIONS FOR THE USER TO INTERACT WITH APP **/
 class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {

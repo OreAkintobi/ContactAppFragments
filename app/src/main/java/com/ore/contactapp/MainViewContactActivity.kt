@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.ore.loginsignupui.R
 import kotlinx.android.synthetic.main.activity_main_view_contact.*
 
+/** DISPLAYS AN INDIVIDUAL CONTACT'S INFORMATION ON A SEPARATE PAGE AFTER REDIRECTING FROM RECYCLERVIEW/CONTACT LIST **/
 class MainViewContactActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

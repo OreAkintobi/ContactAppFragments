@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 
+/** CREATES A VIEWMODEL CLASS WHICH HOLDS AND MANAGES UI-RELATED DATA TO MAKE IT WITHSTAND APP LIFE CYCLE CHANGES **/
 // Class extends AndroidViewModel and requires application as a parameter.
 class ContactViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -11,7 +12,6 @@ class ContactViewModel(application: Application) : AndroidViewModel(application)
     private val repository: ContactRepository
     // LiveData gives us updated contacts when they change.
     val allContacts: LiveData<List<Contact>>
-
 
     init {
         // Gets reference to ContactDao from ContactDatabase to construct

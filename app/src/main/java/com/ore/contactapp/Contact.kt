@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+
+/** SHOWS WHERE CONTACT APP IS CREATED AND VARIABLES INITIALIZED FOR DATABASES **/
 @Entity(tableName = "contacts_table")
 @Parcelize
 data class Contact(

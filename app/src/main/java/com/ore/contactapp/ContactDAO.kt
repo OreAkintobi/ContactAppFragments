@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
+/** SHOWS FUNCTIONS/METHODS THAT ARE IMPLEMENTABLE ON ROOM DATABASE OF CONTACT APP **/
 @Dao
 interface ContactDAO {
     @Query("SELECT * FROM contacts_table")

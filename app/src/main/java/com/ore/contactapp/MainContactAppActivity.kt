@@ -12,7 +12,7 @@ import com.wajahatkarim3.easyvalidation.core.view_ktx.nonEmpty
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validator
 import kotlinx.android.synthetic.main.activity_main_contact_app.*
 
-
+/** SHOWS ADD CONTACT PAGE WITH FIELDS FOR NAME, EMAIL AND PHONE NUMBER **/
 class MainBabyBlissLoginUIActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
