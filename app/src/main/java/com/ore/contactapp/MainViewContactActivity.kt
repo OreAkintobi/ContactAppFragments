@@ -1,16 +1,21 @@
 package com.ore.contactapp
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.ore.loginsignupui.R
 import kotlinx.android.synthetic.main.activity_main_view_contact.*
 
 /** DISPLAYS AN INDIVIDUAL CONTACT'S INFORMATION ON A SEPARATE PAGE AFTER REDIRECTING FROM RECYCLERVIEW/CONTACT LIST **/
 class MainViewContactActivity : AppCompatActivity() {
+    val REQUEST_CODE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,16 +28,6 @@ class MainViewContactActivity : AppCompatActivity() {
         // sets up event listener for Back Navigation Icon
         toolbar.setNavigationOnClickListener {
             super.onBackPressed()
-        }
-
-        // sets up event listener on phone ImageView/Button
-        callContact.setOnClickListener {
-            callContact()
-        }
-
-        // sets up event listener on email ImageView/Button
-        emailContact.setOnClickListener {
-            emailContact()
         }
 
         val bundle = intent.extras
@@ -48,14 +43,13 @@ class MainViewContactActivity : AppCompatActivity() {
         ).error(R.drawable.ic_add_contact_logo).placeholder(R.drawable.ic_contact_logo_main).into(contactImageTwo)
     }
 
-    fun callContact(){
+    fun callContact(v: View) {
         val number = placeholderViewContactPhone.text.toString().trim()
-
         val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel: " + Uri.encode(number)))
         startActivity(intent)
     }
 
-    fun emailContact(){
+    fun emailContact(v: View) {
         val email = placeholderViewContactEmail.text.toString().trim()
         // Initialize intent
         val intent = Intent(Intent.ACTION_SEND)
@@ -68,6 +62,28 @@ class MainViewContactActivity : AppCompatActivity() {
             startActivity(Intent.createChooser(intent, "Choose Email Client"))
         } catch (e: Exception){
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun changeProfilePicture(V: View) {
+        val img = Intent(
+            Intent.ACTION_PICK,
+            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            //If no permission, request permission
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE
+            )
+        } else {
+            img.type = "image/*"
+            img.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(img, "select a picture"), REQUEST_CODE)
         }
     }
 }
