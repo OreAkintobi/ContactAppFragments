@@ -1,10 +1,11 @@
-package com.ore.contactapp
+package com.ore.contactapp.ui.login
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.ore.contactapp.ui.MainActivity
 import com.ore.loginsignupui.R
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -32,8 +33,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun login(){
-        val intent = Intent(this, MainOpenAppActivity::class.java)
+    private fun login() {
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 }

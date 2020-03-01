@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ore.contactapp.LoginActivity">
+    tools:context="com.ore.contactapp.ui.login.LoginActivity">
 
     <TextView
         android:id="@+id/headerText"
@@ -30,7 +30,7 @@
         android:maxWidth="200dp"
         android:maxHeight="200dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_contact_logo_main"
+        app:srcCompat="@drawable/ic_contact_logo_main"
         app:layout_constraintBottom_toTopOf="@+id/openAppButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

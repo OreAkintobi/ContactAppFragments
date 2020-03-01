@@ -1,81 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/background"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="contact"
+            type="com.ore.contactapp.Contact" />
+    </data>
 
     <LinearLayout
+        android:id="@+id/contact_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:background="@color/background"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/contactImageTwo"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:maxWidth="35dp"
-            android:maxHeight="35dp"
-            android:scaleType="fitCenter"
-            android:layout_marginStart="10dp"
-            android:src="@drawable/ic_person_black_24dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/contactName"
-            style="@style/NormalText"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:gravity="center_vertical"
-            android:textSize="20sp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="Name" />
+            <ImageView
+                android:id="@+id/contactImageTwo"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:adjustViewBounds="true"
+                android:maxWidth="35dp"
+                android:maxHeight="35dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_person_black_24dp" />
 
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/contactEmail"
-            style="@style/NormalText"
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:gravity="center_vertical"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            tools:text="Email" />
+            <TextView
+                android:id="@+id/contactName"
+                style="@style/NormalText"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="@{contact.name}"
+                android:textSize="20sp"
+                tools:text="Placeholder" />
 
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/contactPhone"
-            style="@style/NormalText"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:gravity="center_vertical"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            tools:text="Phone" />
+            <TextView
+                android:id="@+id/contactEmail"
+                style="@style/NormalText"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:gravity="center_vertical"
+                android:text="@{contact.email}"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/contactCall"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:maxWidth="35dp"
-            android:maxHeight="35dp"
-            android:focusable="true"
-            android:clickable="true"
-            android:focusableInTouchMode="true"
-            android:scaleType="fitCenter"
-            android:layout_marginStart="10dp"
-            app:srcCompat="@drawable/ic_phone_black_24dp" />
+            <TextView
+                android:id="@+id/contactPhone"
+                style="@style/NormalText"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:gravity="center_vertical"
+                android:text="@{contact.phone}"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/contactCall"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:maxWidth="35dp"
+                android:maxHeight="35dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_phone_black_24dp" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
-
-
-</LinearLayout>
+</layout>

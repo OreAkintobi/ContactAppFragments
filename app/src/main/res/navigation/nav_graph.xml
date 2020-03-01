@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentOpenApp">
+
+    <fragment
+        android:id="@+id/fragmentOpenApp"
+        android:name="com.ore.contactapp.ui.login.FragmentOpenApp"
+        android:label="FragmentOpenApp"
+        tools:layout="@layout/fragment_open_app">
+        <action
+            android:id="@+id/action_fragmentOpenApp_to_fragmentAddContact"
+            app:destination="@id/fragmentAddContact" />
+        <action
+            android:id="@+id/action_fragmentOpenApp_to_fragmentAllContacts2"
+            app:destination="@id/fragmentAllContacts" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddContact"
+        android:name="com.ore.contactapp.ui.addcontact.FragmentAddContact"
+        android:label="FragmentAddContact"
+        tools:layout="@layout/fragment_add_contact">
+        <action
+            android:id="@+id/action_fragmentAddContact_to_fragmentAllContacts2"
+            app:destination="@id/fragmentAllContacts"
+            app:popUpTo="@+id/fragmentOpenApp"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAllContacts"
+        android:name="com.ore.contactapp.ui.allcontacts.FragmentAllContacts"
+        android:label="FragmentAllContacts"
+        tools:layout="@layout/fragment_all_contacts">
+        <action
+            android:id="@+id/action_fragmentAllContacts_to_fragmentAddContact2"
+            app:destination="@id/fragmentAddContact" />
+        <action
+            android:id="@+id/action_fragmentAllContacts_to_fragmentViewSingleContact"
+            app:destination="@id/fragmentViewSingleContact" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentViewSingleContact"
+        android:name="com.ore.contactapp.ui.singlecontact.FragmentViewSingleContact"
+        android:label="FragmentViewSingleContact"
+        tools:layout="@layout/fragment_view_single_contact">
+        <argument
+            android:name="contact"
+            app:argType="com.ore.contactapp.Contact" />
+    </fragment>
+</navigation>

@@ -1,4 +1,4 @@
-package com.ore.contactapp
+package com.ore.contactapp.utils
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -18,7 +18,10 @@ class SettingsActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferen
         if (supportFragmentManager.findFragmentById(android.R.id.content) == null){
             supportFragmentManager
                 .beginTransaction()
-                .replace(android.R.id.content, SettingsFragment())
+                .replace(
+                    android.R.id.content,
+                    SettingsFragment()
+                )
                 .commit()
         }
 

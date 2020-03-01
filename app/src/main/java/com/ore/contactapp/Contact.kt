@@ -8,14 +8,17 @@ import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
 /** SHOWS WHERE CONTACT APP IS CREATED AND VARIABLES INITIALIZED FOR DATABASES **/
-@Entity(tableName = "contacts_table")
 @Parcelize
+@Entity(tableName = "contact_table")
 data class Contact(
-    @ColumnInfo(name = "name") val name: String?,
-    @ColumnInfo(name = "email") val email: String?,
-    @ColumnInfo(name = "phone") val phone: String?
+    @ColumnInfo(name = "name")
+    val name: String?,
+    @ColumnInfo(name = "email")
+    val email: String?,
+    @ColumnInfo(name = "phone")
+    val phone: String?
 ) : Parcelable {
     @IgnoredOnParcel
     @PrimaryKey(autoGenerate = true)
-    var id: Long = 0
+    var contactId: Long = 0L
 }
