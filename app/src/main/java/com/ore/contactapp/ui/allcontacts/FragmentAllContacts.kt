@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import com.ore.contactapp.Contact
 import com.ore.contactapp.database.ContactDatabase
 import com.ore.contactapp.utils.toast
@@ -27,7 +29,7 @@ import kotlinx.coroutines.launch
 class FragmentAllContacts : Fragment() {
     private lateinit var allContactsViewModel: AllContactsViewModel
     private lateinit var binding: FragmentAllContactsBinding
-    private lateinit var adapter: AllContactsAdapter
+    lateinit var adapter: AllContactsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,15 +39,18 @@ class FragmentAllContacts : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_all_contacts, container, false)
         val application = requireNotNull(this.activity).application
         val dataSource = ContactDatabase.getInstance(application).contactDatabaseDao
+        val firestoreDB = FirebaseFirestore.getInstance()
         val viewModelFactory = AllContactsViewModelFactory(dataSource, application)
         allContactsViewModel =
             ViewModelProvider(this, viewModelFactory).get((AllContactsViewModel::class.java))
         binding.allContactsViewModel = allContactsViewModel
         binding.lifecycleOwner = this
 
-        allContactsViewModel.contacts.observe(viewLifecycleOwner, Observer {
-            it as ArrayList<Contact>
-            adapter = AllContactsAdapter(it, this.context!!) { contact ->
+
+        allContactsViewModel.contacts.observe(viewLifecycleOwner, Observer { contactList ->
+            contactList as ArrayList<Contact>
+            adapter =
+                AllContactsAdapter(contactList.sortedBy { it.name }, this.context!!) { contact ->
                 view!!.findNavController().navigate(
                     FragmentAllContactsDirections.actionFragmentAllContactsToFragmentViewSingleContact(
                         contact
@@ -76,10 +81,20 @@ class FragmentAllContacts : Fragment() {
                 val contact = adapter.getContactAt(viewHolder.adapterPosition)
                 AlertDialog.Builder(context).apply {
                     setTitle("Are you sure you want to delete ${contact.name}?")
-                    setMessage("This contact will be gone, gone, gone!")
+                    setMessage("This contact will be deleted on ALL databases.")
                     setPositiveButton("Yes") { _, _ ->
-                        CoroutineScope(Main).launch {
-                            dataSource.deleteContact(contact)
+                        firestoreDB.collection("Contacts").document("${contact.contactDbId}")
+                            .delete().addOnCompleteListener {
+                            CoroutineScope(Main).launch {
+                                dataSource.deleteContact(contact)
+                            }
+                        }.addOnFailureListener {
+                            it.stackTrace
+                            Toast.makeText(
+                                context,
+                                "This Operation didn't work because ${it.stackTrace}",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                         context.toast("${contact.name} deleted", 1)
                     }
@@ -89,7 +104,6 @@ class FragmentAllContacts : Fragment() {
                 }.create().show()
                 binding.recyclerView.scrollToPosition(viewHolder.adapterPosition)
             }
-
         }).attachToRecyclerView(binding.recyclerView)
 
         return binding.root

@@ -2,6 +2,7 @@ package com.ore.contactapp.ui.addcontact
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.firebase.firestore.FirebaseFirestore
 import com.ore.contactapp.Contact
 import com.ore.contactapp.database.ContactDatabase
 import com.ore.contactapp.ui.allcontacts.AllContactsViewModel
@@ -34,6 +36,7 @@ class FragmentAddContact : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_contact, container, false)
         val application = requireNotNull(this.activity).application
         val dataSource = ContactDatabase.getInstance(requireContext()).contactDatabaseDao
+        val firestoreDB = FirebaseFirestore.getInstance()
         val viewModelFactory = AllContactsViewModelFactory(dataSource, application)
         val allContactsViewModel =
             ViewModelProvider(this, viewModelFactory).get((AllContactsViewModel::class.java))
@@ -51,14 +54,25 @@ class FragmentAddContact : Fragment() {
             val phone = binding.phone.text.toString().trim()
             val contact = Contact(name, email, phone)
             if (saveContact()) {
-                GlobalScope.async(Dispatchers.IO) {
-                    dataSource.insertContact(contact)
+                firestoreDB.collection("Contacts").add(contact).addOnCompleteListener {
+                    contact.contactDbId = it.result?.id
+                    Log.e("contactDbId", contact.contactDbId!!.toString())
+                    GlobalScope.async(Dispatchers.IO) {
+                        dataSource.insertContact(contact)
+                    }
+                }.addOnFailureListener {
+                    it.stackTrace
+                    Toast.makeText(
+                        context,
+                        "This Operation didn't work because ${it.stackTrace}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
                 view!!.findNavController().navigate(
                     FragmentAddContactDirections.actionFragmentAddContactToFragmentAllContacts2()
                 )
             } else {
-                Toast.makeText(context, "Ko Le Werk", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "This Operation didn't Work", Toast.LENGTH_LONG).show()
             }
 
         }

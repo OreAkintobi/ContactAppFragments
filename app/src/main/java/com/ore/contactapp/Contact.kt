@@ -21,4 +21,7 @@ data class Contact(
     @IgnoredOnParcel
     @PrimaryKey(autoGenerate = true)
     var contactId: Long = 0L
+    //    @IgnoredOnParcel
+    @ColumnInfo(name = "contactDbId")
+    var contactDbId: String? = ""
 }

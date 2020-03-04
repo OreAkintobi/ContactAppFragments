@@ -18,7 +18,7 @@ class AllContactsViewModel(
     // The ViewModel maintains a reference to the repository to get data.
     private val repository: ContactRepository
     // LiveData gives us updated contacts when they change.
-    val contacts: LiveData<List<Contact>>
+    val contacts: LiveData<MutableList<Contact>>
 
     init {
         database = ContactDatabase.getInstance(application).contactDatabaseDao
@@ -28,6 +28,9 @@ class AllContactsViewModel(
 
     fun insert(contact: Contact) = viewModelScope.launch {
         repository.insert(contact)
+    }
 
+    fun clear() = viewModelScope.launch {
+        repository.clearContacts()
     }
 }

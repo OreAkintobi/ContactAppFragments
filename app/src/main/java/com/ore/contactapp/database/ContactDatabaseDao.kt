@@ -9,6 +9,9 @@ interface ContactDatabaseDao {
     @Insert
     fun insertContact(vararg contact: Contact)
 
+    @Insert
+    fun insertSingle(contact: Contact)
+
     @Update
     fun updateContact(contact: Contact)
 
@@ -25,7 +28,7 @@ interface ContactDatabaseDao {
     fun clearContacts()
 
     @Query("SELECT * from contact_table ORDER BY name ASC")
-    fun getAllContacts(): LiveData<List<Contact>>
+    fun getAllContacts(): LiveData<MutableList<Contact>>
 
     @Query("SELECT * FROM contact_table ORDER BY contactId DESC LIMIT 1")
     fun getLastContact(): Contact

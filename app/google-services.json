@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "798855320580",
-    "firebase_url": "https://contactme-integrated-storage.firebaseio.com",
-    "project_id": "contactme-integrated-storage",
-    "storage_bucket": "contactme-integrated-storage.appspot.com"
+    "project_number": "953961679637",
+    "firebase_url": "https://contactme-fragments.firebaseio.com",
+    "project_id": "contactme-fragments",
+    "storage_bucket": "contactme-fragments.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:798855320580:android:6eef96f4d080d7848c5151",
+        "mobilesdk_app_id": "1:953961679637:android:f464f92d794c0fd7af371c",
         "android_client_info": {
           "package_name": "com.ore.contactapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "798855320580-mp97qnp2jaa8s39obul2td5bciau00fo.apps.googleusercontent.com",
+          "client_id": "953961679637-mg07fkc18vvisciiu07p7aguiecnoil8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBTAHWtbHqPnpCwUyvS25AKKedWlQOPhRA"
+          "current_key": "AIzaSyAnkWMFaXnHPNiqT5pwQf9OXmFspiEPv8U"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "798855320580-mp97qnp2jaa8s39obul2td5bciau00fo.apps.googleusercontent.com",
+              "client_id": "953961679637-mg07fkc18vvisciiu07p7aguiecnoil8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
