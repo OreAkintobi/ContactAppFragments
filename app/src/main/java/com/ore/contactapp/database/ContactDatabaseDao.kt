@@ -30,6 +30,6 @@ interface ContactDatabaseDao {
     @Query("SELECT * from contact_table ORDER BY name ASC")
     fun getAllContacts(): LiveData<MutableList<Contact>>
 
-    @Query("SELECT * FROM contact_table ORDER BY contactId DESC LIMIT 1")
+    @Query("SELECT * FROM contact_table ORDER BY contactDbId DESC LIMIT 1")
     fun getLastContact(): Contact
 }

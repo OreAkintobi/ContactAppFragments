@@ -19,9 +19,7 @@ data class Contact(
     val phone: String?
 ) : Parcelable {
     @IgnoredOnParcel
-    @PrimaryKey(autoGenerate = true)
-    var contactId: Long = 0L
-    //    @IgnoredOnParcel
+    @PrimaryKey
     @ColumnInfo(name = "contactDbId")
-    var contactDbId: String? = ""
+    var contactDbId: String = ""
 }

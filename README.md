@@ -1,6 +1,6 @@
 # ContactMe
 
-This is my ContactMe App. Contacts can be added, saved in a local (Room) database and deleted.
+This is my ContactMe App. Contacts are saved in local (Room) and FireStore databases simultaneously and deleted simultaneously. All contacts can be viewed.
 
 It has been updated slightly; most activities have been replaced with fragments, with a navcontroller for moving between fragments and passing arguments as well.
 
@@ -10,7 +10,9 @@ Databinding is used to connect data to the layouts.
 
 A lot of boilerplate code has been eliminated.
 
-Pending Firebase authentication and Firestore database
+Pending Firebase authentication, search and edit contact functionalities.
+
+Adapter will also be refactored to accommodate multiple contact view types
 
 
 ## Installation

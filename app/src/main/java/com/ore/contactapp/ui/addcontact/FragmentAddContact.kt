@@ -9,13 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ore.contactapp.Contact
 import com.ore.contactapp.database.ContactDatabase
-import com.ore.contactapp.ui.allcontacts.AllContactsViewModel
-import com.ore.contactapp.ui.allcontacts.AllContactsViewModelFactory
 import com.ore.loginsignupui.R
 import com.ore.loginsignupui.databinding.FragmentAddContactBinding
 import com.wajahatkarim3.easyvalidation.core.view_ktx.nonEmpty
@@ -34,12 +31,8 @@ class FragmentAddContact : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_contact, container, false)
-        val application = requireNotNull(this.activity).application
         val dataSource = ContactDatabase.getInstance(requireContext()).contactDatabaseDao
         val firestoreDB = FirebaseFirestore.getInstance()
-        val viewModelFactory = AllContactsViewModelFactory(dataSource, application)
-        val allContactsViewModel =
-            ViewModelProvider(this, viewModelFactory).get((AllContactsViewModel::class.java))
 
         binding.contact = Contact(
             binding.name.text.toString(),
@@ -55,8 +48,8 @@ class FragmentAddContact : Fragment() {
             val contact = Contact(name, email, phone)
             if (saveContact()) {
                 firestoreDB.collection("Contacts").add(contact).addOnCompleteListener {
-                    contact.contactDbId = it.result?.id
-                    Log.e("contactDbId", contact.contactDbId!!.toString())
+                    contact.contactDbId = it.result?.id.toString()
+                    Log.e("contactDbId", contact.contactDbId)
                     GlobalScope.async(Dispatchers.IO) {
                         dataSource.insertContact(contact)
                     }

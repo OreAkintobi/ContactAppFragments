@@ -46,7 +46,6 @@ class FragmentAllContacts : Fragment() {
         binding.allContactsViewModel = allContactsViewModel
         binding.lifecycleOwner = this
 
-
         allContactsViewModel.contacts.observe(viewLifecycleOwner, Observer { contactList ->
             contactList as ArrayList<Contact>
             adapter =
@@ -83,7 +82,7 @@ class FragmentAllContacts : Fragment() {
                     setTitle("Are you sure you want to delete ${contact.name}?")
                     setMessage("This contact will be deleted on ALL databases.")
                     setPositiveButton("Yes") { _, _ ->
-                        firestoreDB.collection("Contacts").document("${contact.contactDbId}")
+                        firestoreDB.collection("Contacts").document(contact.contactDbId)
                             .delete().addOnCompleteListener {
                             CoroutineScope(Main).launch {
                                 dataSource.deleteContact(contact)
