@@ -17,7 +17,7 @@ Adapter will also be refactored to accommodate multiple contact view types
 
 ## Installation
 
-Go [here](https://drive.google.com/open?id=1SdcoYv3_Ygemb1xdIQN5ZiV10cxJwSc3) to download and install ContactMe apk (Android devices).
+Go [here](https://drive.google.com/open?id=1wXC4GdPnp4OsfJgNkWIOaZ9D7hulZhIE) to download and install ContactMe apk (Android devices).
 
 
 ## Contributing
