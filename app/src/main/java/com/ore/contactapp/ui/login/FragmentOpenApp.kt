@@ -37,9 +37,9 @@ class FragmentOpenApp : Fragment() {
             view.findNavController().navigate(R.id.action_fragmentOpenApp_to_fragmentAllContacts2)
         }
 
-        binding.killAppButton.setOnClickListener {
-            exitApp()
-        }
+//        binding.killAppButton.setOnClickListener {
+//            exitApp()
+//        }
 
 //        binding.logoutButton.setOnClickListener {
 //            val prefs: SharedPreferences = getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
