@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -50,13 +51,28 @@ class FragmentAllContacts : Fragment() {
             contactList as ArrayList<Contact>
             adapter =
                 AllContactsAdapter(contactList.sortedBy { it.name }, this.context!!) { contact ->
-                view!!.findNavController().navigate(
-                    FragmentAllContactsDirections.actionFragmentAllContactsToFragmentViewSingleContact(
-                        contact
+                    view!!.findNavController().navigate(
+                        FragmentAllContactsDirections.actionFragmentAllContactsToFragmentViewSingleContact(
+                            contact
+                        )
                     )
-                )
-            }
+                }
             binding.recyclerView.adapter = adapter
+
+            binding.searchBar.doOnTextChanged { text, _, _, _ ->
+                val result = contactList.filter {
+                    it.name!!.startsWith(text.toString(), true)
+                }
+                adapter = AllContactsAdapter(result, this.context!!) { contact ->
+                    view!!.findNavController().navigate(
+                        FragmentAllContactsDirections.actionFragmentAllContactsToFragmentViewSingleContact(
+                            contact
+                        )
+                    )
+                }
+                binding.recyclerView.adapter = adapter
+                return@doOnTextChanged
+            }
         })
 
         binding.addNewContactButton.setOnClickListener {
@@ -84,17 +100,17 @@ class FragmentAllContacts : Fragment() {
                     setPositiveButton("Yes") { _, _ ->
                         firestoreDB.collection("Contacts").document(contact.contactDbId)
                             .delete().addOnCompleteListener {
-                            CoroutineScope(Main).launch {
-                                dataSource.deleteContact(contact)
+                                CoroutineScope(Main).launch {
+                                    dataSource.deleteContact(contact)
+                                }
+                            }.addOnFailureListener {
+                                it.stackTrace
+                                Toast.makeText(
+                                    context,
+                                    "This Operation didn't work because ${it.stackTrace}",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
-                        }.addOnFailureListener {
-                            it.stackTrace
-                            Toast.makeText(
-                                context,
-                                "This Operation didn't work because ${it.stackTrace}",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
                         context.toast("${contact.name} deleted", 1)
                     }
                     setNegativeButton("No") { _, _ ->

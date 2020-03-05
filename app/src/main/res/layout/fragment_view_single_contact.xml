@@ -51,7 +51,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:onClick="changeProfilePicture"
                 app:civ_border="false" />
 
 

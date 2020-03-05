@@ -26,12 +26,25 @@
             android:background="@color/colorPrimary"
             android:elevation="4dp"
             android:theme="@style/AppTheme"
-            app:layout_constraintBottom_toTopOf="@id/recyclerView"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="All Contacts"
             app:titleTextColor="@color/background" />
+
+        <EditText
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:autofillHints=""
+            android:hint="@string/search_contacts"
+            android:inputType="textPersonName"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarAll" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -41,7 +54,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarAll" />
+            app:layout_constraintTop_toBottomOf="@id/searchBar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addNewContactButton"
